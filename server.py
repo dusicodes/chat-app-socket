@@ -19,10 +19,16 @@ def handle_client(conn, addr):
 
             if not data:
                 break
-            conn.sendall(data)  # this is used to send data to the client
             print(
                 f"{clients[conn]} sent message to server: ", repr(data.decode("utf-8"))
             )
+            for client in clients:
+                if client != conn:
+                    client.sendall(data)
+
+    for client in clients:
+        client.sendall(f"{clients[conn]} left the server".decode("utf-8"))
+    del clients[conn]
 
 
 with socket.socket(
