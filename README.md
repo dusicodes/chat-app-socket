@@ -1,0 +1,1 @@
+This project plays around with TCP sockets, you have two terminals and can send messages to each other
